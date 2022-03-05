@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.15",
+    "express": "^4.17.3",
+    "md5": "^2.3.0",
+    "micro": "^9.3.4",
+    "mongodb": "^4.4.1"
+  }
+}
