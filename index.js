@@ -10,12 +10,9 @@ const config = {
 }
 
 const client = new MongoClient(config.MONGO_URL);
+
 const app = express()
 app.use(express.json())
-
-// TODO: Set index
-// - origin_1
-// - hash_1
 
 app.get('/', function (req, res) {
   res.send('Hello World')
@@ -32,6 +29,10 @@ app.post('/url', async (req, res) => {
     await client.connect();
     const database = client.db("app");
     const url = database.collection("url");
+    const indexName = await url.createIndex({ 
+        origin: 1, hash: 1,
+    });
+    console.log('index name =', indexName);
 
     const result = await url.updateOne(
         { origin: origin }, 
@@ -83,6 +84,3 @@ app.get('/url/:hash', async (req, res) => {
 
 app.listen(3000)
 log.info("server started");
-
-
-
